@@ -13,4 +13,9 @@ class PedidosController extends Controller
       ->get();
     return view('pedidos.index', compact('pedidos'));
   }
+
+  public function create()
+  {
+    return view('pedidos.form');
+  }
 }
