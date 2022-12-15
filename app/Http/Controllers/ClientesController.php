@@ -9,7 +9,7 @@ class ClientesController extends Controller
 {
   public function index()
   {
-    $clientes = DB::table('clientes')
+    $clientes = DB::table('clientes')->select(DB::raw('id, nome, cpf, sexo, endereco, cidade, estado, data_nascimento, (select 1 from pedidos p where p.id_cliente = clientes.id) as fk_pedido'))
     ->get();
     return view('clientes.index', compact('clientes'));
   }

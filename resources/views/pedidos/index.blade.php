@@ -25,6 +25,7 @@
             <thead>
                 <th class="text-center align-middle">ID</th>
                 <th class="text-center align-middle">Cliente</th>
+                <th class="text-center align-middle">Valor (R$)</th>
                 <th class="text-center align-middle">
                   <a href="{{ route('p_form') }}">
                     <button type="button" class="btn btn-info">
@@ -37,7 +38,8 @@
               @foreach ($pedidos as $pedido)
                 <tr>
                   <td class="text-center">{{ $pedido->id }}</td>
-                  <td class="text-center">{{ $pedido->id_cliente }}</td>
+                  <td class="text-center">{{ $pedido->nome }} - {{ $pedido->cpf }}</td>
+                  <td class="text-center">{{ number_format($pedido->valor, 2, ',', '.'); }}</td>
                   <td class="text-center">
                     <form>
                       <button class="btn btn-warning" type="submit" name="alt" value="{{ $pedido->id }}" formaction="{{route('p_alt')}}">Alterar</button>

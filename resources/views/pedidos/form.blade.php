@@ -17,19 +17,26 @@
     <div class="container">
       <form action="<?=(isset($cliente)) ? route('p_update') : route('p_save')?>" method='POST'>
         @csrf
-        <div class="row mt-2">
+        <div class="row mt-3">
           <div class="col-md-3">
             <label class="form-label" for="endereco">Data do Pedido *</label>
-            <input class="form-control" type="date" value="<?= (isset($pedido)) ? date('Y-m-d', strtotime($pedido->data)) : ''; ?>" name="endereco" id="endereco" maxlength="120" required>
+            <input class="form-control" type="date" value="<?= (isset($pedido)) ? date('Y-m-d', strtotime($pedido->data)) : date('Y-m-d'); ?>" name="data" id="data" required>
           </div>
-          <div class="col-md-3">
-            <label class="form-label" for="cliente">Cliente *</label>
-            <select id="estado" name="cliente" class="form-control" required>
+          <div class="col-md-5">
+            <label class="form-label" for="id_cliente">Cliente *</label>
+            <select id="id_cliente" name="id_cliente" class="form-select" required>
+              <option value="">Selecione um Cliente</option>
+              @foreach ($clientes as $cliente)
+                <option value="{{$cliente->id}}" {{(isset($pedido) and $pedido->id_cliente == $cliente->id) ? 'selected' : ''}}>{{$cliente->nome}} - {{$cliente->cpf}}</option>
+              @endforeach
             </select>
           </div>
           <div class="col-md-4">
             <label class="form-label" for="valor">Valor *</label>
-            <input class="form-control" type="text" value="<?= (isset($pedido)) ? $pedido->valor : ''; ?>" name="valor" id="valor" required>
+            <div class="input-group mb-3">
+              <span class="input-group-text">R$</span>
+              <input class="form-control" type="text" value="<?= (isset($pedido)) ? $pedido->valor : ''; ?>" name="valor" id="valor" required>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -38,7 +45,7 @@
               <button class="btn btn-warning mt-3" type="button">Voltar</button>
             </a>
           </div>
-          <div class="col-md-6 mb-2 text-right">
+          <div class="col-md-6 mb-2 text-end">
             <button class="btn btn-success mt-3" type="submit">Salvar</button>
           </div>
         </div>

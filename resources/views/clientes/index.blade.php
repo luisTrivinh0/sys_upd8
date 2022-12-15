@@ -8,7 +8,7 @@
      <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" integrity="sha512-0XDfGxFliYJPFrideYOoxdgNIvrwGTLnmK20xZbCAvPfLGQMzHUsaqZK8ZoH+luXGRxTrS46+Aq400nCnAT0/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Clientes</title>
@@ -48,8 +48,12 @@
                   <td class="text-center">{{ ($cliente->sexo != 'M' ? 'Feminino': 'Masculino') }}</td>
                   <td class="text-center">
                     <form>
-                      <button class="btn btn-warning" type="submit" name="alt" value="{{ $cliente->id }}" formaction="{{route('cli_alt')}}">Alterar</button>
-                      <button class="btn btn-danger" type="submit" name="del" value="{{ $cliente->id }}" formaction="{{route('cli_del')}}">Excluir</button>
+                        <button class="btn btn-warning" type="submit" name="alt" value="{{ $cliente->id }}" formaction="{{route('cli_alt')}}">Alterar</button>
+                      @if($cliente->fk_pedido != 1)
+                        <button class="btn btn-danger" type="submit" name="del" value="{{ $cliente->id }}" formaction="{{route('cli_del')}}">Excluir</button>
+                      @else
+                      <button class="btn btn-danger" type="button" disabled title="Cliente possui vínculos e não pode ser excluído!">Excluir</button>
+                      @endif
                     </form>
                   </td>
                 </tr>
