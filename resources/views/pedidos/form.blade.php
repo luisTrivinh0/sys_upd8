@@ -9,7 +9,7 @@
     @yield('navbar', View::make('main.navbar'))
     @show
     <div class="container">
-      <form action="<?=(isset($cliente)) ? route('cli_update') : route('cli_save')?>" method='POST'>
+      <form action="<?=(isset($cliente)) ? route('p_update') : route('p_save')?>" method='POST'>
         @csrf
         <div class="form-row mt-5">
           <div class="col-md-4">

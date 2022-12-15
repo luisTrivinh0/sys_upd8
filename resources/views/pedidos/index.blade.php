@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/app.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+    <title>Pedidos</title>
   </head>
   <body>
     @yield('navbar', View::make('main.navbar'))
@@ -13,18 +13,14 @@
     <div class="col-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="text-center card-title text-info">Cadastro de Clientes</h4>
+          <h4 class="text-center card-title text-info">Cadastro de Pedidos</h4>
           <br>
           <table class="table table-striped table-bordered" id="datatable">
             <thead>
                 <th class="text-center align-middle">ID</th>
                 <th class="text-center align-middle">Cliente</th>
-                <th class="text-center align-middle">CPF</th>
-                <th class="text-center align-middle">Data Nasc.</th>
-                <th class="text-center align-middle">Endereço</th>
-                <th class="text-center align-middle">Sexo</th>
                 <th class="text-center align-middle">
-                  <a href="{{ route('cli_form') }}">
+                  <a href="{{ route('p_form') }}">
                     <button type="button" class="btn btn-info">
                        Novo
                     </button>
@@ -32,18 +28,14 @@
                 </th>
             </thead>
             <tbody>
-              @foreach ($clientes as $cliente)
+              @foreach ($pedidos as $pedido)
                 <tr>
-                  <td class="text-center">{{ $cliente->id }}</td>
-                  <td class="text-center">{{ $cliente->nome }}</td>
-                  <td class="text-center">{{ $cliente->cpf }}</td>
-                  <td class="text-center">{{ ($cliente->data_nascimento != NULL ? date('d/m/Y', strtotime($cliente->data_nascimento)) : 'Sem Data') }}</td>
-                  <td class="text-center">{{ $cliente->endereco . ' - ' . $cliente->cidade . '/' . $cliente->estado}}</td>
-                  <td class="text-center">{{ ($cliente->sexo != 'M' ? 'Feminino': 'Masculino') }}</td>
+                  <td class="text-center">{{ $pedido->id }}</td>
+                  <td class="text-center">{{ $pedido->id_cliente }}</td>
                   <td class="text-center">
                     <form>
-                      <button class="btn btn-warning" type="submit" name="alt" value="{{ $cliente->id }}" formaction="{{route('cli_alt')}}">Alterar</button>
-                      <button class="btn btn-danger" type="submit" name="del" value="{{ $cliente->id }}" formaction="{{route('cli_del')}}">Excluir</button>
+                      <button class="btn btn-warning" type="submit" name="alt" value="{{ $pedido->id }}" formaction="{{route('p_alt')}}">Alterar</button>
+                      <button class="btn btn-danger" type="submit" name="del" value="{{ $pedido->id }}" formaction="{{route('p_del')}}">Excluir</button>
                     </form>
                   </td>
                 </tr>

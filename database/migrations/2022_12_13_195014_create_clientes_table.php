@@ -14,6 +14,7 @@ return new class extends Migration
 
     public function up()
     {
+    if (!Schema::hasTable('clientes')) {
         Schema::create('clientes', function (Blueprint $table) {
           $table->id();
           $table->string('nome');
@@ -24,6 +25,7 @@ return new class extends Migration
           $table->string('cidade');
           $table->timestamp('data_nascimento')->nullable();
         });
+      }
     }
 
     /**
