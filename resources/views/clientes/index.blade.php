@@ -2,7 +2,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/app.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -92,7 +92,13 @@
                 "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-        }
+        },
+        "columnDefs": [
+          {
+            "orderable": false,
+            "targets": 6
+          }
+        ]
       });
     } );
     var msg ="{{ session()->get('mensagem')}}";

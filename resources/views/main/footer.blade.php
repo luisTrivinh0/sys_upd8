@@ -31,8 +31,7 @@
 .footer-basic .social {
   text-align:center;
 }
-
-.footer-basic .social > a {
+.social > a {
   font-size:24px;
   width:40px;
   height:40px;
