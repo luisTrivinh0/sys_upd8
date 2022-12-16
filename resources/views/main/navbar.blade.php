@@ -6,7 +6,6 @@ if (strstr($url, 'clientes')
   $active_c = 'active';
 }
 @endphp
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{route('index')}}">Sistema Laravel</a>
