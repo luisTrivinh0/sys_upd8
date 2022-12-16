@@ -24,7 +24,7 @@ Route::get('/clientes/excluir', 'App\Http\Controllers\ClientesController@delete'
 Route::get('/clientes/index', 'App\Http\Controllers\ClientesController@index')->name('cli_index');
 Route::post('/clientes/cadastro', 'App\Http\Controllers\ClientesController@store')->name('cli_save');
 
-//Rotas de Clientes
+//Rotas de Pedidos
 Route::get('/pedidos/cadastro', 'App\Http\Controllers\PedidosController@create')->name('p_form');
 Route::get('/pedidos/alterar', 'App\Http\Controllers\PedidosController@update_form')->name('p_alt');
 Route::post('/pedidos/update', 'App\Http\Controllers\PedidosController@update')->name('p_update');
