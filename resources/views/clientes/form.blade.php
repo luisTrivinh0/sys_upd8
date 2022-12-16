@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -45,41 +46,14 @@
             <label class="form-label" for="endereco">Endereço *</label>
             <input class="form-control" type="text" value="<?= (isset($cliente)) ? $cliente->endereco : ''; ?>" name="endereco" id="endereco" maxlength="120" required>
           </div>
-          <div class="col-md-4">
-            <label class="form-label" for="cidade">Cidade *</label>
-            <input class="form-control" type="text" value="<?= (isset($cliente)) ? $cliente->cidade : ''; ?>" name="cidade" id="cidade" maxlength="120" required>
-          </div>
           <div class="col-md-3">
             <label class="form-label" for="estado">Estado *</label>
-            <select id="estado" name="estado" class="form-control" required>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-              <option value="EX">Estrangeiro</option>
+            <select id="estado" name="estado" class="form-select" onchange='busca_cidades($("#estado").find("option:selected").attr("id"));'required>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="cidade">Cidade *</label>
+            <select id="cidade" name="cidade" class="form-select" required>
             </select>
           </div>
         </div>
@@ -89,7 +63,7 @@
               <button class="btn btn-warning mt-3" type="button">Voltar</button>
             </a>
           </div>
-          <div class="col-md-6 mb-2 text-right">
+          <div class="col-md-6 mb-2 text-end">
             <button class="btn btn-success mt-3" type="submit">Salvar</button>
           </div>
         </div>
@@ -97,7 +71,60 @@
     </div>
   </body>
   <script>
+    $(document).ready(function () {
+      $.ajax({
+          type: "get",
+          url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados/",
+          data: {orderBy: 'nome'},
+          dataType: 'json',
+          contentType: "application/json; charset=utf-8",
+          success: function (obj) {
+            if (obj != null) {
+               var selectbox = $('#estado');
+               selectbox.find('option').remove();
+               $.each(obj, function (i, d) {
+                  if('{{(isset($cliente)) ? $cliente->estado : ''}}' == d.sigla){
+                    $('<option>').val(d.sigla).attr('id', d.id).text(d.nome).appendTo(selectbox).attr("selected","selected");
+                  }else{
+                    $('<option>').val(d.sigla).attr('id', d.id).text(d.nome).appendTo(selectbox);
+                  }
+               });
+            }
+          }
+      });
+    });
+    $('#estado').val('{{(isset($cliente)) ? $cliente->estado : ''}}').change();
+    if('{{(isset($cliente)) ? $cliente->estado : ''}}' != ""){
+      busca_cidades('{{$cliente->estado}}');
+    }
+    function busca_cidades(id) {
+      $.ajax({
+          type: "get",
+          url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados/"+id+"/municipios",
+          data: {},
+          dataType: 'json',
+          contentType: "application/json; charset=utf-8",
+          success: function (obj) {
+            if (obj != null) {
+               var selectbox = $('#cidade');
+               console.log(obj)
+               selectbox.find('option').remove();
+               $.each(obj, function (i, d) {
+                if('{{(isset($cliente)) ? $cliente->cidade : ''}}' == d.nome){
+                  $('<option>').val(d.nome).text(d.nome).appendTo(selectbox).attr("selected","selected");
+                }else{
+                  $('<option>').val(d.nome).text(d.nome).appendTo(selectbox);
+                }
+              });
+            }
+          }
+      });
+    }
+
+    $('#sexo').val('{{(isset($cliente)) ? $cliente->sexo : ''}}').change();
     $("#cpf").mask('000.000.000-00')
+
+
   </script>
     @yield('footer', View::make('main.footer'))
   @show
