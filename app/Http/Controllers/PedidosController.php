@@ -14,6 +14,12 @@ class PedidosController extends Controller
     return view('pedidos.index', compact('pedidos'));
   }
 
+  public function get(Request $request)
+  {
+    $pedido = DB::table('pedidos')->where('id', '=', $request->alt)->get();
+    return json_encode($pedido);
+  }
+
   public function create()
   {
     $clientes = DB::table('clientes')

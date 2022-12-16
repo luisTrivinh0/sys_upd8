@@ -17,13 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('/clientes/get/{id}', 'App\Http\Controllers\ClientesController@get');
 Route::post('/clientes/create', 'App\Http\Controllers\ClientesController@store');
 Route::post('/clientes/update', 'App\Http\Controllers\ClientesController@update');
 Route::get('/clientes/delete', 'App\Http\Controllers\ClientesController@delete');
 
 
 //Rotas de Clientes
+Route::get('/pedidos/get/{id}', 'App\Http\Controllers\PedidosController@get');
 Route::post('/pedidos/create', 'App\Http\Controllers\PedidosController@store');
 Route::post('/pedidos/update', 'App\Http\Controllers\PedidosController@update');
 Route::get('/pedidos/delete', 'App\Http\Controllers\PedidosController@delete');

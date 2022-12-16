@@ -13,6 +13,13 @@ class ClientesController extends Controller
     ->get();
     return view('clientes.index', compact('clientes'));
   }
+
+  public function get(Request $request)
+  {
+    $cliente = DB::table('clientes')->where('id', '=', $request->id)->get();
+    return json_encode($cliente);
+  }
+
   public function create()
   {
     return view('clientes.form');
