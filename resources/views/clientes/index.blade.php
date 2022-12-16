@@ -1,6 +1,5 @@
 
-<!DOCTYPE html>
-<html lang="pt-br">
+
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/app.css">
@@ -107,4 +106,4 @@
   </script>
         @yield('footer', View::make('main.footer'))
     @show
-</html>
+

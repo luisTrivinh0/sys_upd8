@@ -34,6 +34,7 @@
           <div class="card-body">
             <h3>Ol&aacute;!&nbsp;</h3>
             <h3><br />Bem vindo ao meu projeto de sistema em <b class="text-danger">Laravel</b> e com Front-end com <b class="text-secondary">Bootstrap + CSS</b> :D</h3>
+            <h3><br />Também estou utilizando a API do IBGE para popular os campos de Estado e Cidades dinamicamente.</h3>
             <h3><br />Esse projeto tem o intuito de demonstrar algumas habilidades em <b class="text-danger">Laravel</b>, <b class="text-danger">MySQL</b>, <b class="text-danger">PHP</b>, <b class="text-secondary">Javascript</b>, <b class="text-secondary">jQuery</b> e afins.</h3>
             <h3>Todo o sistema foi desenvolvido por mim, Luís Trivinho, e também é possível acompanhar a evolução do mesmo pelo versionamento no meu <a class="text-info" href="https://github.com/luisTrivinh0" target="_blank"><b>> Github <</b></a> !<br />
             <br />Caso haja qualquer d&uacute;vida ou bugs, basta entrar em contato pelo e-mail ou telefone: <br><b class="text-info">luis.trivinho@icloud.com</b> ou <b class="text-info">+55 15 99104-6030</b></h3>
@@ -44,4 +45,4 @@
   </body>
       @yield('footer', View::make('main.footer'))
     @show
-</html>
+
