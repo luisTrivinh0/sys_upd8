@@ -123,8 +123,6 @@
             position: place.geometry.location,
           })
         );
-        console.log(place.address_components);
-        console.log(place.address_components[0].short_name.length);
         if(place.address_components[1].short_name.length == 2){
           $('#estado').val(place.address_components[1].short_name).change();
           busca_cidades($('#estado').val(), place.address_components[0].short_name);
