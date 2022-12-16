@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-2">
           <label class="form-label" for="sexo">Sexo *</label>
-          <select id="sexo" name="sexo" class="form-control" required>
+          <select id="sexo" name="sexo" class="form-select" required>
             <option value="">Selecione</option>
             <option value="M">Masculino</option>
             <option value="F">Feminino</option>
@@ -45,17 +45,18 @@
       <div class="row mt-2">
         <div class="col-md-5">
           <label class="form-label" for="endereco">Endereço *</label>
-          <input class="form-control" type="text" value="<?= (isset($cliente)) ? $cliente->endereco : ''; ?>" name="endereco" id="endereco" placeholder="Busque pelo endereço e selecione" maxlength="255" required>
+          <input class="form-control" type="text" value="<?= (isset($cliente)) ? $cliente->endereco : ''; ?>" name="endereco" id="endereco" placeholder="Busque pelo endereço e selecione para filtrar o Estado" maxlength="255" required>
         </div>
         <div class="col-md-3">
           <label class="form-label" for="estado">Estado *</label>
-          <select id="estado" name="estado" class="form-select" onchange='busca_cidades($("#estado").find("option:selected").attr("id"));'required>
-            <option value="" selected>Selecione um Estado</option>
+          <select id="estado" name="estado" class="form-select" disabled required>
+            <option value="" selected>Busque pelo Endereço</option>
           </select>
         </div>
         <div class="col-md-4">
           <label class="form-label" for="cidade">Cidade *</label>
           <select id="cidade" name="cidade" class="form-select" required>
+            <option value="" selected>Busque pelo Endereço</option>
           </select>
         </div>
       </div>
@@ -182,7 +183,7 @@
     });
   });
   $('#estado').val('{{(isset($cliente)) ? $cliente->estado : ''}}').change();
-  if('{{(isset($cliente)) ? $cliente->estado : ''}}' != ""){
+  if('{{(isset($cliente)) ? $cliente->estado : ''}}' != "" && '{{(isset($cliente)) ? $cliente->cidade : ''}}'){
     busca_cidades('{{(isset($cliente)) ? $cliente->estado : ''}}', '{{(isset($cliente)) ? $cliente->cidade : ''}}');
   }
   function busca_cidades(id, cidade = "") {
